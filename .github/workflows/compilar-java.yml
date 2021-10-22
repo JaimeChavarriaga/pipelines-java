@@ -1,0 +1,33 @@
+name: Pruebas de Unidad
+
+# eventos
+on:
+  push:
+    branches: [ master ]  # combino los datos en master
+  pull_request:
+    branches: [ master ]  # cuando hay pull request
+  workflow_dispatch:      # cuando hago clic en un botón
+  
+
+# stages -> jobs
+# jobs
+jobs:
+
+  hola-mundo:
+        
+    runs-on: ubuntu-latest
+
+    steps:
+      # utiliza un componente que se llama actions
+      - name: descargar el código fuente 
+        uses: actions/checkout@v2
+
+      # ejecuto una línea
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # ejecutar varias líneas
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
