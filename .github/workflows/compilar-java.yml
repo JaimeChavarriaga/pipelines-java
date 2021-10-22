@@ -22,12 +22,13 @@ jobs:
       - name: descargar el código fuente 
         uses: actions/checkout@v2
 
-      # ejecuto una línea
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Setup Java JDK
+          uses: actions/setup-java@v2.3.1
+          with:
+            java-version: 11
+            distribution: 'adopt'
+            java-package: jdk
 
-      # ejecutar varias líneas
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Compila el proyecto y ejecuta las pruebas
+        run: mvn -B package --file pom.xml
+
