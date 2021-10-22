@@ -14,8 +14,13 @@ on:
 jobs:
 
   hola-mundo:
-        
-    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [11, 12]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       # utiliza un componente que se llama actions
@@ -25,10 +30,10 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: ${{ matrix.java }}
           distribution: 'adopt'
           java-package: jdk
 
       - name: Compila el proyecto y ejecuta las pruebas
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml 
 
